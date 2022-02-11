@@ -33,9 +33,20 @@
       console.log(parseResponse);
       if(parseResponse)
       {
-        const resText = await response.text();
+        let resText = await response.text();
+        let resJson = JSON.parse(resText);
+        messageText = JSON.stringify(resJson.message);
+        usersText = JSON.stringify(resJson.users);
         console.log(resText);
-        content.innerHTML += `<p>${resText}</p>`;
+        if(resJson.users)
+        {
+          content.innerHTML += `<p>${usersText}</p>`;
+        }
+        else
+        {
+          content.innerHTML += `<p>${messageText}</p>`;
+        }
+        
       }
     };
 
